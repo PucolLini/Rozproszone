@@ -1,0 +1,16 @@
+Lab 6 - interfejs gniazd (sockets) w systemie Windows
+Tutorial Windows dot. interfejsu Winsock2:
+https://learn.microsoft.com/en-us/windows/win32/winsock/getting-started-with-winsock
+
+Zadanie zaliczeniowe (C/C++, Windows):
+Uwaga: za pozostawione w kodzie nieobsłużone (a obsługiwalne) ostrzeżenia (warnings) punktacja za rozwiązane zadanie będzie zmniejszana o 10%-20% (w zależności od ilości i znaczenia ostrzeżeń). Dla kompilatora gcc ostrzeżenia włączamy za pomocą opcji
+-Wall
+
+Należy napisać dwie aplikacje serwera i klienta:
+
+aplikacje konsolowe lub okienkowe (tylko Win API!),
+łączące się za pomocą podstawowego interfejsu gniazd (Winsock2),
+umożliwiające jednoczesną obsługę wielu klientów (przez gniazda synchroniczne+wątki lub ew. gniazda asynchroniczne),
+aplikacja kliencka ma inicjować na serwerze zauważalnie czasochłonne obliczenia (trwające min. 30 sek., np. poszukiwanie liczb pierwszych w zadanym zakresie liczbowym) lub wymusić zamknięcie serwera (użytkownik programu klienckiego wybiera z "menu" opcję obliczeń lub zamknięcia serwera),
+aplikacja serwera musi korzystać z jakiegoś zasobu współdzielonego dla wszystkich klientów (np. pliku, do którego zapisuje w trakcie obliczeń cząstkowe wyniki dla każdego z klientów, wraz ze stosownym opisem, umożliwiającym identyfikację klienta) oraz zapewniać właściwą synchronizację dostępu do tego zasobu,
+komunikacja musi zachodzić w obie strony pomiędzy klientem a serwerem.
