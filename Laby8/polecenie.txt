@@ -1,0 +1,17 @@
+Lab 8 - potoki w systemie UNIX/Linux
+Zadanie zaliczeniowe (C, Linux):
+Uwaga: za pozostawione w kodzie nieobsłużone (a obsługiwalne) ostrzeżenia (warnings) punktacja za rozwiązane zadanie będzie zmniejszana o 10%-20% (w zależności od ilości i znaczenia ostrzeżeń). Dla kompilatora gcc ostrzeżenia włączamy za pomocą opcji
+-Wall 
+
+Zadanie zaliczeniowe:
+
+Rozszerzenie zadania zaliczeniowego Lab 7. Nadal szukamy liczb pierwszych, tym razem dokładamy komunikację przez potoki oraz podział pracy na pod-procesy. Program ma działać następująco:
+
+uruchamiamy proces nadrzędny i tworzymy potok nazwany (kolejkę FIFO) o ustalonej nazwie (np. potok_WEJSCIOWY), proces oczekuje na zadania szukania liczb pierwszych przychodzące przez potok;
+za pośrednictwem polecenia echo wysyłamy z terminala do potoku (potok_WEJSCIOWY) dostępne komendy:
+tworzenia zadania poszukiwania liczb pierwszych (podajemy przedział [wartość_min; wartość_max] oraz liczbę K mówiącą ile należy uruchomić pod-procesów);
+kończenia pracy całego programu;
+gdy proces nadrzędny odbierze nowe zadanie poszukiwania liczb pierwszych  ([wartość_min; wartość_max] oraz K) generuje dla tego zadania K pod-procesów i rozdziela podany zakres liczb na pod-zakresy;
+pod-proces szuka liczb pierwszych tworząc dynamiczną pulę wątków (np. po jednym wątku dla każdej sprawdzanej liczby), odsyła komplet uzyskanych wyników przez anonimowy potok do procesu nadrzędnego;
+proces nadrzędny zbiera wyniki od pod-procesów dla danego zadania, gdy uzyska komplet wyników: sortuje wszystkie liczby rosnąco i wyświetla je na ekranie;
+w przypadku odbioru polecenia zamknięcia aplikacji należy zwolnić wszystkie zasoby i pozamykać wszystkie wątki i pod-procesy.
