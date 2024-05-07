@@ -1,0 +1,13 @@
+Lab 7 - wątki POSIX
+Zadanie zaliczeniowe (C, Linux):
+Uwaga: za pozostawione w kodzie nieobsłużone (a obsługiwalne) ostrzeżenia (warnings) punktacja za rozwiązane zadanie będzie zmniejszana o 10%-20% (w zależności od ilości i znaczenia ostrzeżeń). Dla kompilatora gcc ostrzeżenia włączamy za pomocą opcji
+-Wall
+
+Zaimplementować wielowątkowy program szukający liczb pierwszych.
+Podczas uruchomienia programu użytkownik podaje parametry:
+- liczba wątków roboczych,
+- dolny zakres przeszukiwania liczb pierwszych,
+- górny zakres przeszukiwania liczb pierwszych.
+Program ma dokonywać rozsądnego podziału przeszukiwanej przestrzeni liczb [dolny zakres; górny zakres] na zadaną liczbę wątków roboczych (każdy z wątków przeszukuje tylko przedzieloną mu pod-przestrzeń).
+Liczby pierwsze znajdowane przez wątki mają być zapisywane do współdzielonego pliku (logu: w każdej linii ID wątku oraz znaleziona przez niego liczba pierwsza) oraz do współdzielonej zmiennej (jakaś struktura danych, np. tablica). Dostęp do współdzielonego pliku oraz współdzielonej zmiennej ma być synchronizowany.
+Po zakończeniu pracy wszystkich wątków roboczych wątek główny wyświetla wszystkie znalezione liczby pierwsze w kolejności malejącej (od największej do najmniejszej) wraz ze statystyką ile liczb pierwszych znalazł każdy z wątków roboczych.
