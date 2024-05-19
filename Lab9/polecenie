@@ -1,0 +1,8 @@
+Lab 9 - wielowątkowość w języku Java
+Materiały do laboratorium dostępne są tutaj
+
+Zadanie zaliczeniowe (Java):
+Napisać 2 programy konsolowe w języku Java:
+1. (max. 5 pkt.) program implementujący model producent-konsument, szczegółowa treść zadania w nowych materiałach do lab 9, str. 9 (1.7 Zadanie);
+2. (max. 5 pkt.) program implementujący sprawdzanie liczb pierwszych w puli wątków, szczegółowa treść zadania w nowych materiałach do lab 9, str. 18/19 (2.6 Zadanie).
+Uwaga: w programie 2. dodatkowo należy dodać możliwość wprowadzenia komendy wyjścia z pętli i zamknięcia programu np. quit zamiast jednej z wprowadzanych liczb do sprawdzenia.
