@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.concurrent.*;
 
 public class JavaExercise2 {
-
+    public static boolean running = true;
     private static class CachingPrimeChecker {
         // bezpieczne cachowanie wyników
         private final Map<Long, Boolean> cache = new ConcurrentHashMap<>();
@@ -43,7 +43,7 @@ public class JavaExercise2 {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         CachingPrimeChecker primeChecker = new CachingPrimeChecker();
 
         final int numberOfThreads = 4;
@@ -51,15 +51,29 @@ public class JavaExercise2 {
 
         Scanner scanner = new Scanner(System.in);
 
-        while (true) {
+        while (running) {
             List<Future<Boolean>> futures = new ArrayList<>();
 
             int numbersToCheck = 7;
 
             System.out.println("Enter " + numbersToCheck + " numbers:");
             long[] numbers = new long[numbersToCheck];
+
             for (int i = 0; i < numbersToCheck; i++) {
-                numbers[i] = scanner.nextLong();
+                numbers[i] = -1;
+            }
+
+            for (int i = 0; i < numbersToCheck; i++) {
+                if(scanner.hasNextLong()){
+                    numbers[i] = scanner.nextLong();
+                } else {
+                    String input = scanner.nextLine().trim();
+                    if("quit".equalsIgnoreCase(input)){
+                        running = false;
+                        numbersToCheck = i;
+                        break;
+                    }
+                }
             }
 
             //czekanie na 4 watki aby wszystkie wystartowaly
@@ -68,8 +82,14 @@ public class JavaExercise2 {
             for (long number : numbers) {
                 futures.add(executor.submit(() -> {
                     latch.countDown();
-                    boolean isPrime = primeChecker.isPrime(number);
-                    System.out.printf("Number %d is prime: %b%n", number, isPrime);
+                    boolean isPrime;
+                    if (number != -1) {
+                        isPrime = primeChecker.isPrime(number);
+                        System.out.printf("Number %d is prime: %b%n", number, isPrime);
+                    }
+                    else{
+                        isPrime = false;
+                    }
                     latch.countDown();
                     return isPrime;
                 }));
@@ -84,6 +104,15 @@ public class JavaExercise2 {
                     e.printStackTrace();
                 }
             }
+
+            if(!running){
+                break;
+            }
+        }
+
+        executor.shutdown();
+        if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
+            executor.shutdownNow();
         }
     }
 }
